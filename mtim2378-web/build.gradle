@@ -1,0 +1,32 @@
+plugins {
+    id 'war'
+}
+
+dependencies {
+    implementation project(':mtim2378-backend')
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.16'
+    runtimeOnly group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.12'
+}
+
+project.ext.deploymentName='idde-lab3'
+project.ext.tomcatHome=System.getenv("CATALINA_HOME")
+
+task deploy(type: Copy, dependsOn: 'war') {
+    System.out.println(tomcatHome)
+    doFirst {
+        if (!tomcatHome) throw new InvalidUserDataException("Tomcat home (CATALINA_HOME) not set")
+    }
+    from war.archiveFile
+    rename war.archiveFileName.get(), "${deploymentName}.war"
+    into "${tomcatHome}/webapps"
+}
+
+task undeploy(type: Delete) {
+    doFirst {
+        if (!tomcatHome) throw new InvalidUserDataException("Tomcat home (CATALINA_HOME) not set")
+    }
+    delete "${tomcatHome}/webapps/${deploymentName}.war"
+}

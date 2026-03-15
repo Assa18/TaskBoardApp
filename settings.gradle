@@ -1,0 +1,6 @@
+rootProject.name = 'mtim2378-idde'
+
+include 'mtim2378-backend'
+include 'mtim2378-desktop'
+include 'mtim2378-web'
+include 'mtim2378-spring'

@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  idde-mysql:
+    image: mysql:8.0.33
+    restart: unless-stopped
+    container_name: idde-mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: idde
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: idde
+    volumes:
+      - iddemysqlvolume:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+  backend:
+    build:
+      context: .
+      dockerfile: mtim2378-spring/Dockerfile
+    depends_on:
+      - idde-mysql
+    ports:
+      - 8080:8080
+
+volumes:
+  iddemysqlvolume:
+networks:
+  idde:

@@ -1,0 +1,11 @@
+apply plugin: 'application'
+
+application {
+    mainClass='edu.bbte.idde.mtim2378.Main'
+}
+
+dependencies {
+    implementation project(':mtim2378-backend')
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.16'
+    runtimeOnly group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.12'
+}

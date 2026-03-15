@@ -1,0 +1,8 @@
+subprojects {
+    apply plugin: 'java'
+//    apply from: '../lint.gradle'
+
+    repositories {
+        mavenCentral()
+    }
+}

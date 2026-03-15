@@ -1,0 +1,14 @@
+database:
+  dbImplType: mem
+  jdbcDriver: com.mysql.cj.jdbc.Driver
+  jdbcUrl: jdbc:mysql://localhost:3306/idde
+  jdbcUsername: idde
+  jdbcPassword: password
+  dbConnectionPoolSize: 10
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
